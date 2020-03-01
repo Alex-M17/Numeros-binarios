@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="row">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <div class="card m-4">
+                <div class="card-body">                 
+                    @for (int i = 1; i <= 10; i++)
+                    {
+                        <div class="form-group float-left ml-2">
+                            <input type="text" id="n@(i)" placeholder="Numero @i" class="form-control">
+                        </div>
+                    }
+
+                    
+                </div>
+
+                <div class="card-footer">
+                    <input type="button" id="btnSubmit" class="btn btn-primary float-right" value="Guardar">
+                </div>
+            </div>
+        }
+    </div>
