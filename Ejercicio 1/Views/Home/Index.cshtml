@@ -1,25 +1,42 @@
-﻿@{
+﻿@model Ejercicio_1.Models.Binarios
+@{
     ViewData["Title"] = "Home Page";
 }
 
     <div class="row">
         @using (Html.BeginForm("Index", "Home", FormMethod.Post))
         {
-            <div class="card m-4">
+            <div class="card box-shadow border-dark m-4">
                 <div class="card-body">                 
                     @for (int i = 1; i <= 10; i++)
                     {
                         <div class="form-group float-left ml-2">
-                            <input type="text" id="n@(i)" placeholder="Numero @i" class="form-control">
+                            <input type="text" id="num" name="num" placeholder="Numero @i" class="form-control" required>
                         </div>
-                    }
-
-                    
+                    }                  
                 </div>
-
-                <div class="card-footer">
-                    <input type="button" id="btnSubmit" class="btn btn-primary float-right" value="Guardar">
+                <div class="card-footer border-dark">
+                    <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary float-right" value="Calcular">Calcular</button>
                 </div>
             </div>
         }
+            <table class="table table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th>Numeros Ingresados</th>
+                        @for(int i = 0; i < 10; i++)
+                        {
+                            <td class="text-center">@Model.Numeros[i]</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Conversion a binarios</th>
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            <td class="text-center">@Model.Binario[i]</td>
+                        }
+                    </tr>
+                </thead>
+            </table>
+        
     </div>

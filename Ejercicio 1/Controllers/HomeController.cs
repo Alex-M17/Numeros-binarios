@@ -11,27 +11,26 @@ namespace Ejercicio_1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            return View();
+            return View(new Binarios());
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Index(Binarios b, string btnSubmit)
         {
-            return View();
+            if(btnSubmit == "Calcular")
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    b.Numeros[i] = int.Parse(Request.Form["num"][i]);
+                    b.Binario[i] = Convert.ToString(b.Numeros[i], 2);
+                }   
+            }
+
+            return View(b);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }
